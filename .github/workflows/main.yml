@@ -22,7 +22,8 @@ jobs:
         run: npm install
         
       - name: Install semgrep
-        run: curl -fsSL https://semgrep.dev/install.sh | sh
+        run: |
+          wget -qO- https://semgrep.dev/ci | bash
 
       - name: Run semgrep
         run: semgrep ci
