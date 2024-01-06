@@ -26,6 +26,7 @@ jobs:
               --sarif --output report.sarif \
               --metrics=off \
               --config="semgrep.yml"
+              --config="p/owasp-top-ten"
 
         # step 3
         
