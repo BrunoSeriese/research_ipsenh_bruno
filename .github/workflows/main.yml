@@ -29,10 +29,10 @@ jobs:
               
         - name: Run semgrep with predefined rule sets
           run: |
-            semgrep  \
+            semgrep --config .semgrep.yml \
               --sarif --output report-predefined.sarif \
               --metrics=off
-              --config .semgrep.yml
+             
         # step 3
         
         - name: save report as pipeline artifact
