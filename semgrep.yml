@@ -1,11 +1,19 @@
 rules:
-  # Predefined rule sets
-
-  - p/owasp-top-ten
-  - p/angular
-  - p/rxjs
-  - p/xss
-  - p/cors
-  - p/csrf
-  - p/secrets
-
+  - id: Test_custome_rule
+    message: |
+      a custome rule for testing
+    languages: [python]
+    severity: ERROR
+    metadata:
+      category: security
+      cwe: "N/A"
+      subcategory: [N/A]
+      confidence: N/A
+      likelihood: N/A
+      impact: N/A
+      description: "Testing custome rule"
+      references:
+        - N/A
+    
+    pattern: |
+      print("hello world")
