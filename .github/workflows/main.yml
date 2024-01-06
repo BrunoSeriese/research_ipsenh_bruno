@@ -27,12 +27,7 @@ jobs:
               --metrics=off \
               --config="semgrep.yml"
               
-        - name: Run semgrep with predefined rule sets
-          run: |
-            semgrep --config .semgrep.yml \
-              --sarif --output report-predefined.sarif \
-              --metrics=off
-             
+       
         # step 3
         
         - name: save report as pipeline artifact

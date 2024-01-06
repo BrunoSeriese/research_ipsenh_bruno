@@ -18,3 +18,4 @@ rules:
     pattern: |
       print("hello world")
 
+  - https://registry.semgrep.dev/ruleset/ci
