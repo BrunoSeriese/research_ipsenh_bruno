@@ -44,10 +44,10 @@ jobs:
           with: 
             name: report.sarif
         - name: Fail if issues were found
-        if: always()
-          run: |
-            if grep -q "results" report.sarif; then
-              echo "Failing due to Semgrep findings"
-              exit 1
-            fi
+          if: always()
+            run: |
+              if grep -q "results" report.sarif; then
+                echo "Failing due to Semgrep findings"
+                exit 1
+              fi
         
