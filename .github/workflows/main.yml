@@ -20,9 +20,9 @@ jobs:
 
       - name: Install dependencies
         run: npm install
+        
+      - name: Install semgrep
+        run: curl -fsSL https://semgrep.dev/install.sh | sh
 
-      - name: Build the Angular app
-        run: npm start
-
-      - name: Run tests (modify this step as needed)
-        run: npm test
+      - name: Run semgrep
+        run: semgrep ci
