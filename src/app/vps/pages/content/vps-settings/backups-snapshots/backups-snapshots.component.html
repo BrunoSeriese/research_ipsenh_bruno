@@ -1,0 +1,102 @@
+<div class="page-container flex gap-10">
+  <div class="settings-container w-1/6">
+    <div class="backup-toggle-container">
+      <span class="block mb-1 text-lg font-medium text-gray-900">Allow instance to create backups</span>
+      <label class="relative inline-flex items-center cursor-pointer">
+        <input class="sr-only peer" type="checkbox" value="">
+        <div
+          class="w-11 h-6 bg-gray-200 peer-focus:outline-none peer-focus:ring-4 peer-focus:ring-blue-300 rounded-full peer peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all dark:border-gray-600 peer-checked:bg-blue-600"></div>
+      </label>
+    </div>
+    <div class="backup-frequency-container">
+      <label class="block mb-1 text-lg font-medium text-gray-900" for="frequency">Backup frequency</label>
+      <select
+        class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5"
+        id="frequency">
+        <option selected value="D">Daily</option>
+        <option value="W">Weekly</option>
+        <option value="M">Monthly</option>
+      </select>
+      <!-- <app-custom-select [options]="['Daily', 'Weekly', 'Monthly']" [defaultOption]="'Daily'"></app-custom-select> -->
+    </div>
+    <div class="backup-frequency-container">
+      <label class="block mb-1 text-lg font-medium text-gray-900" for="time_window">Time window</label>
+      <select
+        class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5"
+        id="time_window">
+        <option selected value="M">Morning</option>
+        <option value="A">Afternoon</option>
+        <option value="E">Evening</option>
+      </select>
+    </div>
+    <div class="info-container w-full">
+      <p class="text-xs text-gray-400">
+        Backups are stored on our server for up to 3 months. After said time, the oldest backup is automatically deleted
+        from our servers.
+      </p>
+      <p class="text-indigo-600 w-fit h-fit text-xs cursor-pointer">create snapshot</p>
+    </div>
+  </div>
+  <div class="table-container w-fit">
+    <div class="relative overflow-x-auto sm:rounded-lg">
+      <table class="w-fit text-sm text-left text-gray-500 light:text-gray-400">
+        <thead class="text-xs text-gray-700 uppercase bg-gray-100 light:bg-gray-700 light:text-gray-400">
+        <tr>
+          <th class="px-6 py-3" scope="col">
+            Backup name
+          </th>
+          <th class="px-6 py-3" scope="col">
+            Type
+          </th>
+          <th class="px-6 py-3" scope="col">
+            Size
+          </th>
+          <th class="px-6 py-3" scope="col">
+            Status
+          </th>
+          <th class="px-6 py-3" scope="col">
+            Created
+          </th>
+          <th class="px-6 py-3" scope="col">
+            Expiration
+          </th>
+          <th class="px-6 py-3" scope="col">
+            Actions
+          </th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr [routerLink]="'/vps/vps-settings/' + vmDisplay.id"
+            class="bg-white border-b light:bg-gray-800 light:border-gray-700 hover:bg-gray-50 light:hover:bg-gray-600 cursor-pointer">
+          <th class="px-6 py-4 font-medium text-gray-900 whitespace-wrap light:text-white" scope="row">
+            {{vmDisplay.display_name}}
+          </th>
+          <td class="px-6 py-4">
+            {{vmDisplay.ip_address}}
+          </td>
+          <td class="px-6 py-4">
+            {{vmDisplay.operating_system}}
+          </td>
+          <td class="px-6 py-4">
+            {{vmDisplay.cores}}
+          </td>
+          <td class="px-6 py-4">
+            {{vmDisplay.ram}}
+          </td>
+          <td class="px-6 py-4">
+            {{vmDisplay.storage}}
+          </td>
+          <td class="px-6 py-4 text-right">
+            <a
+              class="font-medium text-blue-600 light:text-blue-500 hover:underline">Edit</a>
+          </td>
+        </tr>
+        </tbody>
+      </table>
+    </div>
+
+  </div>
+</div>
+<button class="bg-indigo-600 w-fit hover:bg-blue-700 text-white font-bold py-4 px-8 rounded">
+  Save data
+</button>

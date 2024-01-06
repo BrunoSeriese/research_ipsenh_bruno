@@ -1,0 +1,99 @@
+<div class="max-w-7xl mx-auto">
+    <div class="header">
+        <div class="title-container">
+            <p class="text-gray-500 font-semibold mb-4">Goedemorgen, Daniel Paans!</p>
+            <h1 class="text-3xl font-bold">MessageQueue Dashboard</h1>
+        </div>
+
+        <div class="flex flex-col space-y-2 items-center justify-center hosts-container">
+            <div class="w-full mx-auto flex flex-row">
+                <label for="project" class="border-b-2 border-blue-500 h-10 flex items-center"><span class="material-symbols-rounded">folder_copy</span></label>
+                <div class="flex-grow">
+                    <select (change)="selectProject($event)" id="project" name="project" class="w-full px-3 h-10 border-b-2 border-blue-500 bg-transparent focus:outline-none">
+                        <option *ngFor="let project of projects" value="{{project.name}}">{{project.name}}</option>
+                    </select>
+                </div>
+            </div>
+
+            <div class="mt-auto flex flex-row space-x-2 justify-center items-center buttons">
+                <a href="{{rabbitMQManagementUrl}}"><app-button class="button" title="Beheer project" symbol="settings"></app-button></a>
+                <app-button class="button" title="Beheer gebruikers" symbol="manage_accounts" [routerLink]="['./users']"></app-button>
+                <app-button class="button" title="Message project aanmaken" symbol="create_new_folder" [routerLink]="['./add-project']"></app-button>
+            </div>
+        </div>
+    </div>
+
+    <ul class="row flex flex-wrap gap-4 p-4">
+        <app-dashboard-tile class="flex-1" symbol="sms" title="Totaal aantal messages" [value]="getMessagesForSelectedProject()"></app-dashboard-tile>
+        <app-dashboard-tile class="flex-1" symbol="queue" title="{{queueDisplayList.length > 1 ? 'Totale queues' : 'Totale queue'}}" [value]="queueDisplayList.length"></app-dashboard-tile>
+        <app-dashboard-tile class="flex-1" symbol="people" title="Totale gebruikers" value="5"></app-dashboard-tile>
+    </ul>
+
+    <hr class="py-3 border-blue-500">
+    <div class="flex flex-col">
+        <div class="overflow-x-auto shadow-md sm:rounded-lg">
+            <div class="inline-block min-w-full align-middle">
+                <div class="overflow-hidden">
+                    <table class="min-w-full divide-y table-auto">
+                        <thead>
+                            <tr>
+                                <th scope="col"
+                                    class="py-3 px-6 text-xs font-medium tracking-wider text-left text-black-700 uppercase dark:text-black-400 text-center font-bold">
+                                    Queue Name
+                                </th>
+                                <th scope="col"
+                                    class="py-3 px-6 text-xs font-medium tracking-wider text-left text-black-700 uppercase dark:text-black-400 text-center font-bold">
+                                    Consumers
+                                </th>
+                                <th scope="col"
+                                    class="py-3 px-6 text-xs font-medium tracking-wider text-left text-black-700 uppercase dark:text-black-400 text-center font-bold">
+                                    Published messages
+                                </th>
+                                <th scope="col"
+                                    class="py-3 px-6 text-xs font-medium tracking-wider text-left text-black-700 uppercase dark:text-black-400 text-center font-bold">
+                                    Unacknowledged messages
+                                </th>
+                                <th scope="col"
+                                    class="py-3 px-6 text-xs font-medium tracking-wider text-left text-black-700 uppercase dark:text-black-400 text-center font-bold">
+                                    Status
+                                </th>
+                                <th scope="col"
+                                    class="py-3 px-6 text-xs font-medium tracking-wider text-left text-black-700 uppercase dark:text-black-400 text-center font-bold">
+                                    Created at
+                                </th>
+                                <th scope="col" class="p-4">
+                                    <span class="sr-only">Edit</span>
+                                </th>
+                            </tr>
+                        </thead>
+                        <tbody class="bg-white divide-y ">
+                            <tr *ngFor="let queueDisplay of queueDisplayList" class="hover:bg-gray-100">
+                                <td class="p-4 w-4">
+                                    <div class="flex items-center">
+                                        <input id="checkbox-table-1" type="checkbox"
+                                            class="w-4 h-4 text-blue-600 bg-gray-100 rounded border-gray-300 focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600">
+                                        <label for="checkbox-table-1" class="sr-only">checkbox</label>
+                                    </div>
+                                </td>
+                                <td class="py-4 px-6 text-sm font-medium whitespace-nowrap dark:text-black text-center">
+                                    {{queueDisplay.name}}</td>
+                                <td
+                                    class="py-4 px-6 text-sm font-medium text-gray-900 whitespace-nowrap dark:text-black text-center">
+                                    {{queueDisplay.consumers}}</td>
+                                <td
+                                    class="py-4 px-6 text-sm font-medium text-gray-900 whitespace-nowrap dark:text-black text-center">
+                                    {{queueDisplay.messages}}</td>
+                                <td
+                                    class="py-4 px-6 text-sm font-medium text-gray-900 whitespace-nowrap dark:text-black text-center">
+                                    {{queueDisplay.messages_unacknowledged}}</td>
+                                <td
+                                    class="py-4 px-6 text-sm font-medium text-gray-900 whitespace-nowrap dark:text-black text-center">
+                                    {{queueDisplay.state}}</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

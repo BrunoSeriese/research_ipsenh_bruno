@@ -1,0 +1,54 @@
+.form-container {
+  display: flex;
+  flex-direction: column;
+  row-gap: 20px;
+
+  button {
+    position: absolute;
+    bottom: 50px;
+  }
+
+  .instance-description {
+
+    p {
+      display: flex;
+      align-content: flex-end;
+    }
+  }
+}
+
+.selected-option {
+  font-size: 1rem;
+  color: #6b7280;
+}
+
+.arrow {
+  width: 0;
+  height: 0;
+  border-style: solid;
+  border-width: 0.375rem 0.375rem 0 0.375rem;
+  border-color: #6b7280 transparent transparent transparent;
+}
+
+.options-container {
+  position: absolute;
+  top: 100%;
+  left: 0;
+  right: 0;
+  z-index: 1;
+  display: none;
+  background-color: #fff;
+  border-radius: 0.375rem;
+  border: 1px solid #ccc;
+  overflow-y: auto;
+  max-height: 10rem;
+}
+
+.option {
+  padding: 0.5rem 1rem;
+  cursor: pointer;
+}
+
+.option:hover {
+  background-color: #f3f4f6;
+}

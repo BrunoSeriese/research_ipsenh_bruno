@@ -1,0 +1,45 @@
+<div class="flex flex-col w-full max-h-[20rem]">
+    <hr class="py-3 border-blue-500">
+        <div class="overflow-x-auto shadow-md sm:rounded-lg">
+            <div class="inline-block min-w-full align-middle ">
+                <table class="min-w-full divide-y table-auto max-h-full">
+                    <thead>
+                        <tr class="sticky top-0 bg-white">
+                            <th scope="col" class="py-3 px-6 text-xs font-medium tracking-wider text-left text-black-700 uppercase dark:text-black-400 text-center font-bold">
+                                <p>Naam</p>
+                            </th>
+                            <th scope="col" class="py-3 px-6 text-xs font-medium tracking-wider text-left text-black-700 uppercase dark:text-black-400 text-center font-bold">
+                                <p>Service</p>
+                            </th>
+                            <th scope="col" class="py-3 px-6 text-xs font-medium tracking-wider text-left text-black-700 uppercase dark:text-black-400 text-center font-bold">
+                                <p>Type</p>
+                            </th>
+                            <th scope="col" class="py-3 px-6 text-xs font-medium tracking-wider text-left text-black-700 uppercase dark:text-black-400 text-center font-bold">
+                                <p>Prijs</p>
+                            </th>
+                            <th scope="col" class="py-3 px-6 text-xs font-medium tracking-wider text-left text-black-700 uppercase dark:text-black-400 text-center font-bold">
+                                <p>Aantal</p>
+                            </th>
+                            <th scope="col" class="py-3 px-6 text-xs font-medium tracking-wider text-left text-black-700 uppercase dark:text-black-400 text-center font-bold">
+                                <p>Totale Prijs</p>
+                            </th>
+                            <th scope="col" class="py-3 px-6 text-xs font-medium tracking-wider text-left text-black-700 uppercase dark:text-black-400 text-center font-bold">
+                                <p>Datum</p>
+                            </th>
+                        </tr>
+                    </thead>
+                    <tbody class="bg-white divide-y ">
+                        <tr app-usage-table-row 
+                        class="hover:bg-gray-100"
+                        *ngFor="let usage of usages" [usage]="usage"
+                        (click)="emitRow(usage)"
+                        (clickedTableCell)="emitTableCell($event)"
+                        (clickedAction)="emitAction($event)"
+                        (checkedRow)="emitCheckedRows(usage)"
+                        >
+                        </tr> 
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>

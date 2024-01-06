@@ -1,0 +1,21 @@
+<div class="form-container">
+  <div class="instance-name">
+    <h2 class="text-lg font-medium text-gray-900">Operating system</h2>
+    <div class="flex flex-row w-fit gap-x-3 items-baseline">
+      <app-custom-select [options]="['Linux', 'Ubuntu', 'Windows']" [defaultOption]="'Ubuntu'" [enableSearchBar]="true"></app-custom-select>
+    </div>
+  </div>
+
+  <div class="instance-description">
+    <h2 class="text-lg font-medium text-gray-900">Instance type</h2>
+    <div class="flex flex-row gap-x-3 items-baseline">
+      <p class="w-fit text-gray-600 bg-indigo-100 py-1 px-2 rounded-md tracking-wider">A instance type</p>
+      <p class="text-indigo-600 w-fit h-fit text-sm cursor-pointer">edit</p>
+    </div>
+  </div>
+
+  <button class="bg-indigo-600 w-fit hover:bg-blue-700 text-white font-bold py-4 px-8 rounded flex flex-row">
+    Save data
+    <span class="material-icons ml-2">save</span>
+  </button>
+</div>

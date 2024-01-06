@@ -1,0 +1,26 @@
+<div class="custom-select flex" #customSelect>
+    <button class="w-fit text-gray-600 bg-indigo-100 py-1 px-2 rounded-md tracking-wider flex flex-row"
+        (click)="toggleOptions()">
+        {{ selectedOption }}
+        <span class="material-icons text-gray-600 scale-75 hover:text-gray-800 cursor-pointer"
+            [ngClass]="{'rotate-180': isDropdownVisible() === 'open'}">arrow_drop_down</span>
+    </button>
+    <ul class="options" [@optionsAnimation]="isDropdownVisible()"
+        (@optionsAnimation.done)="showOptions = isDropdownVisible() === 'open'"
+        [hidden]="isDropdownVisible() === 'closed'">
+        <ng-container *ngIf="enableSearchBar; else noSearchBar">
+            <div class="flex items-center border-b-2 p-2">
+                <input type="text" class="focus:outline-none" placeholder="Search..." [(ngModel)]="searchTerm"
+                    (input)="filterOptions()">
+                <span class="material-icons text-gray-600 scale-75 hover:text-gray-800 ml-2">search</span>
+            </div>
+        </ng-container>
+        <ng-template #noSearchBar>
+            <div class="border-b-2"></div>
+        </ng-template>
+        <li *ngFor="let option of filteredOptions; let even = even; let odd = odd" (click)="selectOption(option)"
+            [ngClass]="{'bg-indigo-100': even, 'bg-white': odd}">
+            {{ option }}
+        </li>
+    </ul>
+</div>

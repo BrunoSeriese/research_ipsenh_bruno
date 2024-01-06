@@ -1,0 +1,96 @@
+<div class="header">
+  <div class="title">
+    <h2>Welkom, Stef</h2>
+    <p>Beheer hier je VPS instanties</p>
+  </div>
+  <div class="new-vm-button">
+    <button
+      [routerLink]="'/vps/new-vps'"
+      class="px-4 py-2 text-sm font-medium leading-5 text-white transition-colors duration-150 bg-blue-600 border border-transparent rounded-lg active:bg-blue-600 hover:bg-blue-700 focus:outline-none focus:shadow-outline-blue">
+      Nieuwe VPS
+    </button>
+  </div>
+</div>
+
+<div class="relative overflow-x-auto sm:rounded-lg">
+  <table class="w-full text-sm text-left text-gray-500 light:text-gray-400">
+    <thead class="text-xs text-gray-700 uppercase bg-gray-100 light:bg-gray-700 light:text-gray-400">
+    <tr>
+      <th class="px-6 py-3" scope="col">
+        Name
+      </th>
+      <th class="px-6 py-3" scope="col">
+        IP Adress
+      </th>
+      <th class="px-6 py-3" scope="col">
+        OS
+      </th>
+      <th class="px-6 py-3" scope="col">
+        Cores
+      </th>
+      <th class="px-6 py-3" scope="col">
+        RAM
+      </th>
+      <th class="px-6 py-3" scope="col">
+        Storage
+      </th>
+      <th class="px-6 py-3" scope="col">
+        Bandwidth
+      </th>
+      <th class="px-6 py-3" scope="col">
+        Created
+      </th>
+      <th class="px-6 py-3" scope="col">
+        Updated
+      </th>
+      <th class="px-6 py-3" scope="col">
+        Actions
+      </th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr *ngFor="let vmDisplay of vmDisplayList" [routerLink]="'/vps/vps-settings/' + vmDisplay.id"
+        class="bg-white border-b light:bg-gray-800 light:border-gray-700 hover:bg-gray-50 light:hover:bg-gray-600 cursor-pointer">
+      <th class="px-6 py-4 font-medium text-gray-900 light:text-white whitespace-nowrap align-middle"
+          scope="row">
+        {{vmDisplay.display_name}} <span [style.color]="getStatusColor(vmDisplay.status)"
+                                         class="text-2xl px-3 font-black">•</span>
+      </th>
+      <td class="px-6 py-4">
+        {{vmDisplay.ip_address}}
+      </td>
+      <td class="px-6 py-4">
+        {{vmDisplay.operating_system}}
+      </td>
+      <td class="px-6 py-4">
+        {{vmDisplay.cores}}
+      </td>
+      <td class="px-6 py-4">
+        {{vmDisplay.ram}}
+      </td>
+      <td class="px-6 py-4">
+        {{vmDisplay.storage}}
+      </td>
+      <td class="px-6 py-4">
+        {{vmDisplay.bandwidth}}
+      </td>
+      <td class="px-6 py-4">
+        {{vmDisplay.created | date: 'dd-MM-yyyy HH:mm:ss'}}
+      </td>
+      <td class="px-6 py-4">
+        {{vmDisplay.last_updated| date: 'dd-MM-yyyy HH:mm:ss'}}
+      </td>
+      <td class="px-6 py-4">
+        <div class="buttons flex">
+          <span class="material-icons">stop_circle</span>
+          <span class="material-icons">pause_circle</span>
+          <span class="material-icons">not_started</span>
+        </div>
+      </td>
+    </tr>
+    </tbody>
+  </table>
+</div>
+
+
+

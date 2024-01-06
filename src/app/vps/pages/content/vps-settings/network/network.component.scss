@@ -1,0 +1,17 @@
+.form-container {
+  display: flex;
+  flex-direction: column;
+  row-gap: 20px;
+
+  button {
+    position: absolute;
+    bottom: 50px;
+  }
+
+  .instance-description {
+    p {
+      display: flex;
+      align-content: flex-end;
+    }
+  }
+}

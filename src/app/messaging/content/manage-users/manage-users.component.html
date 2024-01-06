@@ -1,0 +1,199 @@
+<div class="max-w-7xl mx-auto">
+    <div class="header p-4 flex justify-between items-center">
+        <div class="title-container">
+            <div class="flex gap-2 text-gray-500 mb-4">
+                <span class="material-symbols-rounded">chevron_left</span>
+                <a class="font-semibold hover:underline" [routerLink]="['../']">Messaging Dashboard</a>
+            </div>
+            <h1 class="text-3xl font-bold">Beheer je gebruikers</h1>
+        </div>
+
+        <div class="flex space-x-2 justify-center align-bottom bottom-0 mt-auto">
+            <app-button title="Bewerk gebruiker" symbol="edit" [disabled]="selectedUsers?.length !== 1" (click)="toggleEditUserModal()"></app-button>
+            <app-button title="Verwijder gebruikers" symbol="person_remove" [disabled]="selectedUsers?.length === 0 || !selectedUsers" (click)="toggleDeletionModal()"></app-button>
+            <app-button class="pl-4" title="Voeg gebruiker toe" symbol="person_add" (click)="toggleAddUserModal()"></app-button>
+            <app-button title="Bewerk Admin" symbol="admin_panel_settings" (click)="toggleAdminModal()"></app-button>
+        </div>
+    </div>
+
+    <hr class="border-blue-500">
+    <div class="flex flex-col">
+        <div class="overflow-x-auto shadow-md sm:rounded-lg">
+            <div class="inline-block min-w-full align-middle">
+                <div class="overflow-hidden">
+                    <table class="min-w-full divide-y table-auto">
+                        <colgroup class="w-0 h-0">
+                            <col class="w-1/12">
+                            <col class="w-1/3">
+                            <col class="w-1/3">
+                            <col class="w-1/3">
+                        </colgroup>
+                        <thead>
+                            <tr>
+                                <th scope="col" class="p-4">
+                                    <div class="flex items-center">
+                                        <input id="checkbox-all" type="checkbox" [(ngModel)]="selectAll" (change)="selectAllCheckboxChanged()"
+                                            class="w-4 h-4 text-blue-600 bg-gray-100 rounded border-gray-300 focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600">
+                                        <label for="checkbox-all" class="sr-only">checkbox</label>
+                                    </div>
+                                </th>
+                                <th scope="col"
+                                    class="py-3 px-6 text-xs font-medium tracking-wider text-left text-black-700 uppercase dark:text-black-400 text-center font-bold">
+                                    Gebruikersnaam
+                                </th>
+                                <th scope="col"
+                                    class="py-3 px-6 text-xs font-medium tracking-wider text-left text-black-700 uppercase dark:text-black-400 text-center font-bold">
+                                    Wachtwoord
+                                </th>
+                                <th scope="col"
+                                    class="py-3 px-6 text-xs font-medium tracking-wider text-left text-black-700 uppercase dark:text-black-400 text-center font-bold">
+                                    Role
+                                </th>
+                            </tr>
+                        </thead>
+                        <tbody class="bg-white divide-y ">
+                            <tr *ngFor="let user of users" class="hover:bg-gray-100">
+                                <td class="p-4 w-4">
+                                    <div class="flex items-center">
+                                        <input [id]="'checkbox-table-' + user.username" type="checkbox" [(ngModel)]="user.isSelected" (change)="checkboxChanged()"
+                                            class="w-4 h-4 text-blue-600 bg-gray-100 rounded border-gray-300 focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600">
+                                        <label [for]="'checkbox-table-' + user.username" class="sr-only">checkbox</label>
+                                    </div>
+                                </td>
+                                <td class="py-4 px-6 text-sm font-medium whitespace-nowrap dark:text-black text-center">
+                                    {{user.username}}
+                                </td>
+                                <td class="py-4 px-6 text-sm font-medium text-center">
+                                    *********
+                                </td>
+                                <td class="py-4 px-6 text-sm font-medium text-gray-900 whitespace-nowrap text-center">
+                                    {{user.role}}
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<app-modal title="Verander wachtwoord" [open]="openAdminModal" (close)="toggleAdminModal()">
+    <p class="text-gray-500 font-semibold text-xs mb-2">Verander het wachtwoord voor het administrator account van dit messaging project.</p>
+    <form [formGroup]="adminGroup" class="flex flex-col space-y-2 justify-center" (ngSubmit)="submitAdminForm()">
+        <div>
+          <label for="password">Nieuw wachtwoord *</label>
+          <input type="password" id="password" name="password" formControlName="password"
+			class="w-full md:w-80 px-3 h-10 rounded-l border-2 border-sky-500 focus:outline-none focus:border-sky-500"/>
+        </div>
+
+        <div>
+            <label for="confirmPassword">Bevestig wachtwoord *</label>
+            <input type="password" id="confirmPassword" name="confirmPassword" formControlName="confirmPassword"
+              class="w-full md:w-80 px-3 h-10 rounded-l border-2 border-sky-500 focus:outline-none focus:border-sky-500"/>
+        </div>
+
+        <div *ngIf="adminGroup.invalid && (adminGroup.dirty || adminGroup.touched)" class="text-red-500 text-xs">
+            <div *ngIf="adminGroup.get('password')?.errors?.['required']">Geef een wachtwoord op</div>
+            <div *ngIf="adminGroup.get('password')?.errors?.['minlength']">Wachtwoord moet minstens 8 karakters lang zijn</div>
+            <div *ngIf="adminGroup.get('password')?.errors?.['capital']">Wachtwoord moet minstens een hoofdletter bevatten</div>
+            <div *ngIf="adminGroup.get('password')?.errors?.['number']">Wachtwoord moet minstens een cijfer bevatten</div>
+            <div *ngIf="adminGroup.get('password')?.errors?.['special']">Wachtwoord moet minstens een speciaal karakter bevatten</div>
+            <div *ngIf="adminGroup.get('confirmPassword')?.errors">Wachtwoorden komen niet overeen</div>
+        </div>
+
+        <app-button title="Set Password" symbol="done" type="submit" [disabled]="!this.adminGroup.valid"></app-button>
+    </form>
+</app-modal>
+
+<app-modal title="Voeg gebruiker toe" [open]="openAddUserModal" (close)="toggleAddUserModal()">
+    <div>
+        <p class="text-gray-500 font-semibold text-xs mb-2">Voeg een gebruiker toe aan dit messaging project.</p>
+        <form [formGroup]="addUserGroup" class="flex flex-col space-y-2 justify-center" (ngSubmit)="submitAddUserForm()">
+            <div>
+                <label for="username">Gebruikersnaam *</label>
+                <input #username type="text" id="username" name="username" formControlName="username"
+                    class="w-full md:w-80 px-3 h-10 rounded-l border-2 border-sky-500 focus:outline-none focus:border-sky-500">
+            </div>
+
+            <div>
+                <label for="password">Wachtwoord *</label>
+                <input type="password" id="password" name="password" formControlName="password"
+                    class="w-full md:w-80 px-3 h-10 rounded-l border-2 border-sky-500 focus:outline-none focus:border-sky-500">
+            </div>
+
+            <div>
+                <label for="confirmPassword">Bevestig wachtwoord *</label>
+                <input type="password" id="confirmPassword" name="confirmPassword" formControlName="confirmPassword"
+                    class="w-full md:w-80 px-3 h-10 rounded-l border-2 border-sky-500 focus:outline-none focus:border-sky-500">
+            </div>
+
+            <div *ngIf="addUserGroup.invalid && (addUserGroup.dirty || addUserGroup.touched)" class="text-red-500 text-xs">
+                <div *ngIf="addUserGroup.get('username')?.errors?.['required']">Geef een gebruikersnaam op</div>
+                <div *ngIf="addUserGroup.get('username')?.errors?.['minlength']">Gebruikersnaam moet minstens 3 karakters lang zijn</div>
+                <div *ngIf="addUserGroup.get('username')?.errors?.['maxlength']">Gebruikersnaam mag maximaal 20 karakters lang zijn</div>
+                <div *ngIf="addUserGroup.get('username')?.errors?.['pattern']">Gebruikersnaam mag alleen letters, cijfers en underscores bevatten</div>
+                <div *ngIf="addUserGroup.get('password')?.errors?.['required']">Geef een wachtwoord op</div>
+                <div *ngIf="addUserGroup.get('password')?.errors?.['minlength']">Wachtwoord moet minstens 8 karakters lang zijn</div>
+                <div *ngIf="addUserGroup.get('password')?.errors?.['capital']">Wachtwoord moet minstens een hoofdletter bevatten</div>
+                <div *ngIf="addUserGroup.get('password')?.errors?.['number']">Wachtwoord moet minstens een cijfer bevatten</div>
+                <div *ngIf="addUserGroup.get('password')?.errors?.['special']">Wachtwoord moet minstens een speciaal karakter bevatten</div>
+                <div *ngIf="addUserGroup.get('confirmPassword')?.errors">Wachtwoorden komen niet overeen</div>
+            </div>
+
+            <app-button title="Add User" symbol="done" type="submit" [disabled]="!this.addUserGroup.valid"></app-button>
+        </form>
+    </div>
+</app-modal>
+
+<app-modal title="Weet je zeker dat je deze gebruikers wilt verwijderen?" [open]="openDeletionModal" (close)="toggleDeletionModal()">
+    <ul class="space-y-2 pb-4">
+        <li class="text-gray-500 font-semibold text-xs" *ngFor="let user of selectedUsers">- {{ user.username }}</li>
+    </ul>
+    <app-button title="Verwijder" symbol="delete" type="submit" (click)="deleteUsers()" [disabled]="selectedUsers?.length == 0"></app-button>
+</app-modal>
+
+<app-modal title="Bewerk gebruiker" [open]="openEditUserModal" (close)="toggleEditUserModal()">
+    <div class="space-y-2">
+        <p class="text-gray-500 font-semibold text-xs mb-2">Bewerk de gebruiker {{selectedUsers?.[0]?.username}}.</p>
+
+        <form [formGroup]="editUserGroup" class="flex flex-col space-y-2 justify-center" (ngSubmit)="editUser()">
+            <div>
+                <label for="role">Rol *</label>
+                <select id="role" name="role" formControlName="role"
+                    class="w-full md:w-80 px-3 h-10 rounded-l border-2 border-sky-500 focus:outline-none focus:border-sky-500">
+                    <option value="monitoring">Monitoring</option>
+                    <option value="policymaker">Policymaker</option>
+                    <option value="management">Management</option>
+                    <option value="impersonator">impersonator</option>
+                    <option value="none">Geen rol</option>
+                </select>
+            </div>
+
+            <hr class="h-py bg-gray-400 w-full">
+
+            <p class="text-gray-500 font-semibold text-xs mb-2">Laat het wachtwoord veld leeg om het wachtwoord niet te veranderen.</p>
+            <div>
+                <label for="password">Wachtwoord</label>
+                <input type="password" id="password" name="password" formControlName="password"
+                class="w-full md:w-80 px-3 h-10 rounded-l border-2 border-sky-500 focus:outline-none focus:border-sky-500">
+            </div>
+            <div>
+                <label for="confirmPassword">Bevestig wachtwoord</label>
+                <input type="password" id="confirmPassword" name="confirmPassword" formControlName="confirmPassword"
+                    class="w-full md:w-80 px-3 h-10 rounded-l border-2 border-sky-500 focus:outline-none focus:border-sky-500">
+            </div>
+            <div *ngIf="(!!editUserGroup.value.password || !!editUserGroup.value.confirmPassword) && (editUserGroup.invalid && (editUserGroup.dirty || editUserGroup.touched))" class="text-red-500 text-xs">
+                <div *ngIf="editUserGroup.get('password')?.errors?.['required']">Geef een wachtwoord op</div>
+                <div *ngIf="editUserGroup.get('password')?.errors?.['minlength']">Wachtwoord moet minstens 8 karakters lang zijn</div>
+                <div *ngIf="editUserGroup.get('password')?.errors?.['capital']">Wachtwoord moet minstens een hoofdletter bevatten</div>
+                <div *ngIf="editUserGroup.get('password')?.errors?.['number']">Wachtwoord moet minstens een cijfer bevatten</div>
+                <div *ngIf="editUserGroup.get('password')?.errors?.['special']">Wachtwoord moet minstens een speciaal karakter bevatten</div>
+                <div *ngIf="editUserGroup.get('confirmPassword')?.errors">Wachtwoorden komen niet overeen</div>
+            </div>
+
+            <app-button class="mt-4" title="Bewerk" symbol="done" type="submit" (click)="editUser()"
+            [disabled]="!(!!(editUserGroup.get('role')?.valid && ((!editUserGroup.get('password')?.value && !editUserGroup.get('confirmPassword')?.value) || (editUserGroup.get('password')?.valid && editUserGroup.get('confirmPassword')?.valid))))"></app-button>
+        </form>
+    </div>
+
+</app-modal>

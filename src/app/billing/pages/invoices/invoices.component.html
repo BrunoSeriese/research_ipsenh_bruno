@@ -1,0 +1,17 @@
+<div class="mt-16">
+    <div >
+        <h1 class="font-bold text-3xl">Facturen</h1>
+        <h2>Lijst van uw facturen</h2>
+        <div class="my-10">
+            <app-input (inputEmitter)="search($event)"></app-input>
+        </div>
+        <div *ngIf="!this.invoiceService.filtered">
+            <app-table class="flex h-[38rem]"  [actions]="this.actions" [headers]="this.invoiceHeaders" [rowEntries]="invoiceService.invoices" [variableNames]="this.variablenames" (clickedActionEmitter)="performAction($event)"></app-table>
+        </div>
+        <div *ngIf="this.invoiceService.filtered">
+            <app-table class="flex h-[38rem]" [actions]="this.actions" [headers]="this.invoiceHeaders" [rowEntries]="invoiceService.filteredInvoices" [variableNames]="this.variablenames" (clickedActionEmitter)="performAction($event)"></app-table>
+        </div>
+    </div>
+</div>
+
+

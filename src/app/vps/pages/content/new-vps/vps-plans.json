@@ -1,0 +1,50 @@
+[
+  {
+    "id": 1,
+    "name": "Standaard",
+    "description": "Standaard",
+    "cores": 1,
+    "ram": 4,
+    "storage": 100,
+    "bandwidth": 100,
+    "firewall": true,
+    "price": 10,
+    "ipv4": true,
+    "ipv6": false,
+    "automatic_backups": false,
+    "monitoring": true,
+    "snapshots": true
+  },
+  {
+    "id": 2,
+    "name": "Gouden",
+    "description": "Gouden",
+    "cores": 2,
+    "ram": 8,
+    "storage": 500,
+    "bandwidth": 200,
+    "firewall": true,
+    "price": 20,
+    "ipv4": true,
+    "ipv6": true,
+    "automatic_backups": true,
+    "monitoring": true,
+    "snapshots": true
+  },
+  {
+    "id": 3,
+    "name": "Platina",
+    "description": "Platina",
+    "cores": 4,
+    "ram": 16,
+    "storage": 1000,
+    "bandwidth": 400,
+    "firewall": true,
+    "price": 40,
+    "ipv4": true,
+    "ipv6": true,
+    "automatic_backups": true,
+    "monitoring": true,
+    "snapshots": true
+  }
+]

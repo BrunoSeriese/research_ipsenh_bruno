@@ -1,0 +1,143 @@
+<div class="page-container">
+  <div *ngIf="vmPlan" class="title w-max">
+    <div [routerLink]="'/vps/new-vps'" class="back-button">
+      <span class="material-icons">arrow_back_ios</span>
+    </div>
+    <div class="header">
+      <div class="vps-title">
+        <h2 class="bg-indigo-100 py-1 px-2 rounded-md">{{vmPlan.name}} Pakket</h2>
+      </div>
+
+      <p>Je hebt gekozen voor het {{vmPlan.name}} pakket.</p>
+    </div>
+  </div>
+  <div class="plans-container flex flex-row gap-10">
+    <div
+      class="w-1/3 max-w-sm p-4 bg-white border border-gray-200 rounded-lg shadow sm:p-8 dark:bg-gray-800 dark:border-gray-700">
+      <h5 class="mb-4 text-xl font-medium text-gray-500 dark:text-gray-400">{{vmPlan.name}} pakket</h5>
+      <div class="flex items-baseline text-gray-900 dark:text-white">
+        <span class="text-3xl font-semibold">€</span>
+        <span class="text-5xl font-extrabold tracking-tight">{{vmPlan.price}}</span>
+        <span class="ml-1 text-xl font-normal text-gray-500 dark:text-gray-400">/maand</span>
+      </div>
+      <!-- List -->
+      <ul class="space-y-5 my-7" role="list">
+        <li class="flex flex-col gap-y-2">
+          <span class="text-base font-normal leading-tight text-gray-500 dark:text-gray-400">{{vmPlan.cores}}
+            Cores</span>
+          <span class="text-base font-normal leading-tight text-gray-500 dark:text-gray-400">{{vmPlan.ram}}
+            GB RAM</span>
+          <span class="text-base font-normal leading-tight text-gray-500 dark:text-gray-400">{{vmPlan.storage}}
+            GB SSD</span>
+          <span class="text-base font-normal leading-tight text-gray-500 dark:text-gray-400">{{vmPlan.bandwidth}} bps Bandwidth</span>
+        </li>
+      </ul>
+      <ul class="space-y-5 my-7" role="list">
+        <li [class.line-through]=!vmPlan.firewall class="flex space-x-3 line-through decoration-gray-500">
+          <svg [class.dark:text-indigo-600]=vmPlan.firewall aria-hidden="true"
+               class="flex-shrink-0 w-5 h-5 text-gray-400" fill="currentColor"
+               viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><title>Check icon</title>
+            <path clip-rule="evenodd"
+                  d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z"
+                  fill-rule="evenodd"></path>
+          </svg>
+          <span [class.dark:text-gray-400]=!vmPlan.firewall
+                class="text-base font-normal leading-tight text-gray-500">Firewall</span>
+        </li>
+        <li [class.line-through]=!vmPlan.monitoring class="flex space-x-3 line-through decoration-gray-500">
+          <svg [class.dark:text-indigo-600]=vmPlan.monitoring aria-hidden="true"
+               class="flex-shrink-0 w-5 h-5 text-gray-400" fill="currentColor"
+               viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><title>Check icon</title>
+            <path clip-rule="evenodd"
+                  d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z"
+                  fill-rule="evenodd"></path>
+          </svg>
+          <span [class.dark:text-gray-400]=!vmPlan.monitoring
+                class="text-base font-normal leading-tight text-gray-500">Monitoring</span>
+        </li>
+        <li [class.line-through]=!vmPlan.snapshots class="flex space-x-3 line-through decoration-gray-500">
+          <svg [class.dark:text-indigo-600]=vmPlan.snapshots aria-hidden="true"
+               class="flex-shrink-0 w-5 h-5 text-gray-400" fill="currentColor"
+               viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><title>Check icon</title>
+            <path clip-rule="evenodd"
+                  d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z"
+                  fill-rule="evenodd"></path>
+          </svg>
+          <span [class.dark:text-gray-400]=!vmPlan.snapshots
+                class="text-base font-normal leading-tight text-gray-500">Snapshots</span>
+        </li>
+        <li [class.line-through]=!vmPlan.ipv4 class="flex space-x-3 line-through decoration-gray-500">
+          <svg [class.dark:text-indigo-600]=vmPlan.firewall aria-hidden="true"
+               class="flex-shrink-0 w-5 h-5 text-gray-400" fill="currentColor"
+               viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><title>Check icon</title>
+            <path clip-rule="evenodd"
+                  d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z"
+                  fill-rule="evenodd"></path>
+          </svg>
+          <span [class.dark:text-gray-400]=!vmPlan.firewall
+                class="text-base font-normal leading-tight text-gray-500">IPv4</span>
+        </li>
+        <li [class.line-through]=!vmPlan.ipv6 class="flex space-x-3 line-through decoration-gray-500">
+          <svg [class.dark:text-indigo-600]=vmPlan.ipv6 aria-hidden="true"
+               class="flex-shrink-0 w-5 h-5 text-gray-400" fill="currentColor"
+               viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><title>Check icon</title>
+            <path clip-rule="evenodd"
+                  d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z"
+                  fill-rule="evenodd"></path>
+          </svg>
+          <span [class.dark:text-gray-400]=!vmPlan.ipv6
+                class="text-base font-normal leading-tight text-gray-500">IPv6</span>
+        </li>
+        <li [class.line-through]=!vmPlan.automatic_backups class="flex space-x-3 line-through decoration-gray-500">
+          <svg [class.dark:text-indigo-600]=vmPlan.automatic_backups aria-hidden="true"
+               class="flex-shrink-0 w-5 h-5 text-gray-400" fill="currentColor"
+               viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><title>Check icon</title>
+            <path clip-rule="evenodd"
+                  d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z"
+                  fill-rule="evenodd"></path>
+          </svg>
+          <span [class.dark:text-gray-400]=!vmPlan.automatic_backups
+                class="text-base font-normal leading-tight text-gray-500">Automatic backups</span>
+        </li>
+      </ul>
+    </div>
+    <div class="form w-2/5">
+      <form>
+        <div class="mb-6">
+          <label class="block mb-2 text-sm font-medium text-gray-900 " for="name">VPS Naam</label>
+          <input
+            class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 "
+            id="name"
+            placeholder="Geef je nieuwe VPS een naam..."
+            required type="text">
+        </div>
+        <div class="mb-6">
+          <label class="block mb-2 text-sm font-medium text-gray-900" for="message">Beschrijving</label>
+          <textarea
+            class="block p-2.5 w-full text-sm text-gray-900 bg-gray-50 rounded-lg border border-gray-300 focus:ring-blue-500 focus:border-blue-500"
+            id="message"
+            placeholder="Geef je nieuwe VPS een beschrijving..."
+            required
+            rows="4"></textarea>
+        </div>
+        <div class="flex items-start mb-6">
+          <div class="flex items-center h-5">
+            <input class="w-4 h-4 border border-gray-300 rounded bg-gray-50 focus:ring-3 focus:ring-blue-300 d"
+                   id="remember" required
+                   type="checkbox"
+                   value="">
+          </div>
+          <label class="ml-2 text-sm font-medium text-gray-900" for="remember">Checkbox</label>
+        </div>
+        <button
+          class="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm w-full sm:w-auto px-5 py-2.5 text-center"
+          type="submit">
+          Submit
+        </button>
+      </form>
+    </div>
+  </div>
+</div>
+
+
+

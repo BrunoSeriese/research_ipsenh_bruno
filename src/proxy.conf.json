@@ -1,0 +1,20 @@
+{
+  "/api/messaging": {
+    "target": "http://localhost:8080"
+  },
+  "api/billing": {
+    "target": "http://localhost:8080"
+  },
+  "api/postgres": {
+    "target": "http://localhost:8080"
+  },
+  "api/s3": {
+    "target": "http://localhost:8080"
+  },
+  "api/serverless": {
+    "target": "http://localhost:8080"
+  },
+  "api/vps": {
+    "target": "http://localhost:8080"
+  }
+}

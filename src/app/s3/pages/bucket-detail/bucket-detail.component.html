@@ -1,0 +1,25 @@
+<ng-container *ngIf="bucket">
+  <div class="mx-auto max-w-7xl px-6 lg:px-8">
+    <div class="row">
+      <div class="flex gap-2 text-gray-500 mb-4">
+        <span class="material-symbols-rounded">chevron_left</span>
+        <a class="font-semibold hover:underline" [routerLink]="['../../']">Object Storage Dashboard</a>
+      </div>
+      <h1 class="text-3xl font-bold">Bucket: {{bucket.name}}</h1>
+    </div>
+    <div class="row">
+      <h2 class="text-xl font-semibold mb-1">Objecten</h2>
+      <p class="text-sm text-gray-500">Hieronder treft u de verkenner van alle objecten die zich in de bucket bevinden</p>
+      <div class="flex flex-wrap gap-4 justify-between items-center my-4">
+        <!--     TODO: Issue #47 - Bestanden filteren    -->
+        <app-search-bar class="flex-1" placeHolder="Filter bestanden in huidige folder"></app-search-bar>
+        <div class="flex flex-wrap gap-3">
+          <!--     TODO: Issue #40 - Bestand uploaden & Folder aanmaken    -->
+          <app-button title="Bestand uploaden" symbol="upload"></app-button>
+          <app-button title="Folder aanmaken" symbol="folder"></app-button>
+        </div>
+      </div>
+      <app-objects-browser [bucket]="bucket"></app-objects-browser>
+    </div>
+  </div>
+</ng-container>

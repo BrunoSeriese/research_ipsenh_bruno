@@ -1,0 +1,11 @@
+rules:
+  # Predefined rule sets
+
+  - p/owasp-top-ten
+  - p/angular
+  - p/rxjs
+  - p/xss
+  - p/cors
+  - p/csrf
+  - p/secrets
+

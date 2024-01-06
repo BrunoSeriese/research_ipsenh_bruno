@@ -1,0 +1,45 @@
+.header {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: flex-start;
+  padding: 5px;
+  margin: 10px;
+
+  .title-container {
+    display: flex;
+    flex-direction: column;
+    justify-content: left;
+
+    .title {
+      font-size: 30px;
+      font-weight: bold;
+    }
+  }
+}
+
+@media only screen and (max-width: 700px) {
+  .hosts-container {
+    width: 100%;
+    margin-top: 1rem;
+
+    .buttons {
+      margin-top: 2rem;
+    }
+  }
+
+
+}
+
+@media only screen and (max-width: 1000px) {
+  .header {
+    flex-direction: column;
+  }
+
+  .buttons {
+    flex-wrap: wrap;
+    gap: 10px;
+  }
+}
+
+

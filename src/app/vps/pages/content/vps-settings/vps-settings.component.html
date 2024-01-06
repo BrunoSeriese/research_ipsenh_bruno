@@ -1,0 +1,22 @@
+<div class="page-container">
+  <div *ngIf="vmDisplay" class="title">
+    <div [routerLink]="'/vps/dashboard'" class="back-button">
+      <span class="material-icons">arrow_back_ios</span>
+    </div>
+    <div class="vps-title">
+      <h2>VPS Settings</h2>
+      <h3 class="bg-indigo-100 py-1 px-2 rounded-md">{{vmDisplay.display_name}}</h3>
+    </div>
+
+    <p>Beheer hier je de instellingen van je VPS</p>
+  </div>
+  <div class="tabs w-fit">
+    <div [routerLinkActive]="'tab--active'" [routerLink]="'general'" class="tab">General settings</div>
+    <div [routerLinkActive]="'tab--active'" [routerLink]="'system'" class="tab">System Settings</div>
+    <div [routerLinkActive]="'tab--active'" [routerLink]="'network'" class="tab">Network Settings</div>
+    <div [routerLinkActive]="'tab--active'" [routerLink]="'backups-snapshots'" class="tab">Back-ups & Snapshots</div>
+    <div [routerLinkActive]="'tab--active'" [routerLink]="'monitoring-alerts'" class="tab">Monitoring</div>
+    <div [routerLinkActive]="'tab--active'" [routerLink]="'access-security'" class="tab">Security</div>
+  </div>
+  <router-outlet></router-outlet>
+</div>
