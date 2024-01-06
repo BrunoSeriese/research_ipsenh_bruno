@@ -27,7 +27,7 @@ jobs:
               --metrics=off \
               --config="semgrep.yml" \
               --error
-          continue-on-error: true  # Allow workflow to continue even if this step fails
+          
           
        
         # step 3
