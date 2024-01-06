@@ -27,7 +27,7 @@ jobs:
               --metrics=off \
               --config="semgrep.yml" \
               --error
-          
+          continue-on-error: true  # Allow workflow to continue even if this step fails
           
        
         # step 3
@@ -43,4 +43,11 @@ jobs:
           uses: actions/download-artifact@v2
           with: 
             name: report.sarif
+        - name: Fail if issues were found
+        if: always()
+          run: |
+            if grep -q "results" report.sarif; then
+              echo "Failing due to Semgrep findings"
+              exit 1
+            fi
         
