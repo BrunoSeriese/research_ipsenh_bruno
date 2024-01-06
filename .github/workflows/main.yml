@@ -12,6 +12,10 @@ jobs:
     steps:
       - name: Checkout code
         uses: actions/checkout@v2
+      - name: Install semgrep
+        run: |
+          curl -L https://semgrep.dev/download_linux.sh | sh
+
 
       - name: Set up Node.js
         uses: actions/setup-node@v2
@@ -21,9 +25,6 @@ jobs:
       - name: Install dependencies
         run: npm install
         
-      - name: Install semgrep
-        run: |
-          wget -qO- https://semgrep.dev/ci | bash
-
+   
       - name: Run semgrep
         run: semgrep ci
