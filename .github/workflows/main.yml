@@ -1,31 +1,42 @@
-name: CI
+name: Semgrep Full Scan
 
 on:
   push:
     branches:
       - main
 
+
 jobs:
-  build:
-    runs-on: ubuntu-latest
 
-    steps:
-      - name: Checkout code
-        uses: actions/checkout@v2
-      - name: Install semgrep
-        run: |
-          curl -Lo semgrep.tar.gz https://github.com/returntocorp/semgrep/releases/download/v0.74.0/semgrep-v0.74.0-linux-amd64.tar.gz
-          tar -xzf semgrep.tar.gz
-          sudo mv semgrep /usr/local/bin/
+  semgrep-full:
+      runs-on: ubuntu-latest
+      container:
+        image: returntocorp/semgrep
 
-      - name: Set up Node.js
-        uses: actions/setup-node@v2
-        with:
-          node-version: '20'
+      steps:
 
-      - name: Install dependencies
-        run: npm install
+        # step 1
+        - name: clone application source code
+          uses: actions/checkout@v3
+
+        # step 2
+        - name: full scan
+          run: |
+            semgrep \
+              --sarif --output report.sarif \
+              --metrics=off \
+              --config="p/default"
+
+        # step 3
         
-   
-      - name: Run semgrep
-        run: semgrep ci
+        - name: save report as pipeline artifact
+          uses: actions/upload-artifact@v3
+          with:
+            name: report.sarif
+            path: report.sarif
+            
+        # step 4
+        - name: Download report
+          uses: actions/download-artifact@v2
+          with: 
+            name: report.sarif
