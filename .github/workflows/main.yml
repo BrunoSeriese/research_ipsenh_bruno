@@ -25,7 +25,7 @@ jobs:
             semgrep \
               --sarif --output report.sarif \
               --metrics=off \
-              --config="semgrep.yml"
+              --config="semgrep.yml" \
               --error
               
        
