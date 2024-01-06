@@ -14,8 +14,8 @@ jobs:
         uses: actions/checkout@v2
       - name: Install semgrep
         run: |
-          curl -L https://semgrep.dev/download_linux.sh | sh
-
+          wget https://semgrep.dev/get | sh
+          sudo mv ./semgrep /usr/local/bin
 
       - name: Set up Node.js
         uses: actions/setup-node@v2
