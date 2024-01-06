@@ -26,8 +26,12 @@ jobs:
               --sarif --output report.sarif \
               --metrics=off \
               --config="semgrep.yml"
-              --config="p/owasp-top-ten"
-
+              
+        - name: Run semgrep with predefined rule sets
+        run: |
+          semgrep p/owasp-top-ten p/angular p/rxjs p/xss p/cors p/csrf p/secrets \
+            --sarif --output report-predefined.sarif \
+            --metrics=off
         # step 3
         
         - name: save report as pipeline artifact
