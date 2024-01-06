@@ -1,21 +1,24 @@
 rules:
-  - id: Test_custome_rule
-    message: |
-      a custome rule for testing
-    languages: [python]
-    severity: ERROR
+  - id: node_username
+    patterns:
+      - pattern-not: $X = ''
+      - pattern-not: $OBJ[$X] = ''
+      - pattern-not: $OBJ.$X = ''
+      - pattern-either:
+          - pattern: |
+              $X = '...'
+      - metavariable-regex:
+          metavariable: $X
+          regex: (?i:.*user.*)
+    message: A hardcoded username in plain text is identified. Store it properly in
+      an environment variable.
+    languages:
+      - javascript
+    severity: WARNING
     metadata:
-      category: security
-      cwe: "N/A"
-      subcategory: [N/A]
-      confidence: N/A
-      likelihood: N/A
-      impact: N/A
-      description: "Testing custome rule"
-      references:
-        - N/A
-    
-    pattern: |
-      print("hello world")
+      owasp-web: a3
+      cwe: cwe-798
+      license: LGPL-3.0-or-later
+      vulnerability_class:
+        - Other
 
-  - https://registry.semgrep.dev/ruleset/ci

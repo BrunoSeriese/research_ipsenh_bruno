@@ -1,0 +1,73 @@
+{
+  "$schema": "https://docs.oasis-open.org/sarif/sarif/v2.1.0/os/schemas/sarif-schema-2.1.0.json",
+  "runs": [
+    {
+      "invocations": [
+        {
+          "executionSuccessful": true,
+          "toolExecutionNotifications": []
+        }
+      ],
+      "results": [
+        {
+          "fingerprints": {
+            "matchBasedId/v1": "b6d78b889e51c57274dbef6e126a528ef889b7c83d95a5165de9605ec374d23068474888655be899339254b2c536fed354801ae857396be5bbe8cee51700b233_0"
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "src/app/billing/services/httpService.ts",
+                  "uriBaseId": "%SRCROOT%"
+                },
+                "region": {
+                  "endColumn": 60,
+                  "endLine": 13,
+                  "snippet": {
+                    "text": "    private userID = '5867cc9d-2544-4088-ac1c-9a8b4abf784f'"
+                  },
+                  "startColumn": 13,
+                  "startLine": 13
+                }
+              }
+            }
+          ],
+          "message": {
+            "text": "A hardcoded username in plain text is identified. Store it properly in an environment variable."
+          },
+          "properties": {},
+          "ruleId": "node_username"
+        }
+      ],
+      "tool": {
+        "driver": {
+          "name": "semgrep",
+          "rules": [
+            {
+              "defaultConfiguration": {
+                "level": "warning"
+              },
+              "fullDescription": {
+                "text": "A hardcoded username in plain text is identified. Store it properly in an environment variable."
+              },
+              "id": "node_username",
+              "name": "node_username",
+              "properties": {
+                "precision": "very-high",
+                "tags": [
+                  "cwe-798",
+                  "security"
+                ]
+              },
+              "shortDescription": {
+                "text": "Semgrep Finding: node_username"
+              }
+            }
+          ],
+          "semanticVersion": "1.53.0"
+        }
+      }
+    }
+  ],
+  "version": "2.1.0"
+}
