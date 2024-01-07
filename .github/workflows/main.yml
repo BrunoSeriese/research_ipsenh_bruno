@@ -18,7 +18,10 @@ jobs:
         # step 1
         - name: clone application source code
           uses: actions/checkout@v3
-
+        - name: full scan
+          run: |
+            semgrep ci
+          continue-on-error: true  # Allow workflow to continue even if this step fails
         # step 2
         - name: full scan
           run: |
