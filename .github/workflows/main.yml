@@ -23,9 +23,8 @@ jobs:
         - name: full scan
           run: |
             semgrep ci
-          continue-on-error: true  # Allow workflow to continue even if this step fails
           env:
-            SEMGREP_APP_TOKEN: ${{ secrets.SEMGREP_APP_TOKEN }}
+            SEMGREP_APP_TOKEN: 381e1e17f735f3d9b103e9674c178bc7b62d4441a8fe9460d43ca1110c0fd583
         # step 2
         - name: full scan
           run: |
