@@ -20,15 +20,12 @@ jobs:
           uses: actions/checkout@v3
 
         #init
-        - name: login semgrep
-          run: |
-            semgrep login
-          env:
-            SEMGREP_APP_TOKEN: ${{ secrets.SEMGREP_APP_TOKEN }}
         - name: full scan
           run: |
             semgrep ci
           continue-on-error: true  # Allow workflow to continue even if this step fails
+          env:
+            SEMGREP_APP_TOKEN: ${{ secrets.SEMGREP_APP_TOKEN }}
         # step 2
         - name: full scan
           run: |
