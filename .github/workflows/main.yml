@@ -52,7 +52,7 @@ jobs:
         uses: SonarSource/sonarcloud-github-action@master
         with:
           args: >
-            -Dsonar.projectKey=research_ipsenh_bruno
+            -Dsonar.projectKey=BrunoSeriese_research_ipsenh_bruno
             -Dsonar.organization=brunoseriese
             -Dsonar.host.url=https://sonarcloud.io
   
