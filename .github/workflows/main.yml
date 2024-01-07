@@ -24,7 +24,7 @@ jobs:
           run: |
             semgrep ci
           env:
-            SEMGREP_APP_TOKEN: 381e1e17f735f3d9b103e9674c178bc7b62d4441a8fe9460d43ca1110c0fd583
+            SEMGREP_APP_TOKEN: ${{env.SEMGREP_TOKEN}}
         # # step 2
         # - name: full scan
         #   run: |
