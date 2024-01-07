@@ -25,41 +25,5 @@ jobs:
             semgrep ci
           env:
             SEMGREP_APP_TOKEN: ${{secrets.SEM_SECRET}}
-        # # step 2
-        # - name: full scan
-        #   run: |
-        #     semgrep \
-        #       --sarif --output report.sarif \
-        #       --metrics=off \
-        #       --config="semgrep.yml" \
-        #       --error
-        #   continue-on-error: true  # Allow workflow to continue even if this step fails
-          
-        # - name: owasp and secret scan
-        #   run: |
-        #     semgrep --config "p/gitleaks" --config "p/secrets"  --config "p/owasp-top-ten" \
-        #       --sarif --output defined.sarif \
-        #       --metrics=off \
-        #       --error
-        #   continue-on-error: true  # Allow workflow to continue even if this step fails
-        # # step 3
-        
-        # - name: save report as pipeline artifact
-        # #   uses: actions/upload-artifact@v3
-        # #   with:
-        # #     name: report.sarif
-        # #     path: report.sarif
-            
-        # # step 4
-        # - name: Download report
-        #   uses: actions/download-artifact@v2
-        #   with: 
-        #     name: report.sarif
-        # - name: Fail if issues were found
-        #   if: always()
-        #   run: |
-        #       if grep -q "results" report.sarif; then
-        #         echo "Failing due to Semgrep findings"
-        #         exit 1
-        #       fi
+   
         
