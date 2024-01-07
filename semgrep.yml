@@ -21,4 +21,3 @@ rules:
       license: LGPL-3.0-or-later
       vulnerability_class:
         - Other
-
