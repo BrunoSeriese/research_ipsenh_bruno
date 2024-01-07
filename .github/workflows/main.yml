@@ -24,7 +24,7 @@ jobs:
           run: |
             semgrep ci
           env:
-            SEMGREP_APP_TOKEN: ${{env.SEMGREP_TOKEN}}
+            SEMGREP_APP_TOKEN: ${{secrets.SEM_SECRET}}
         # # step 2
         # - name: full scan
         #   run: |
